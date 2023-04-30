@@ -2,17 +2,19 @@
 
 int main()
 {
+
+	bool isPaused = false;
     sf::RenderWindow window(sf::VideoMode(800, 600), "Fireboy and Watergirl");
-    sf::ContextSettings settings;
-    	settings.antialiasingLevel = 8;
-    sf::Sprite fireboy;
-    sf::Sprite watergirl;
-    sf::Sprite key;
-    sf::Sprite door;
-    sf::Sprite obstacle;
-	sf::RectangleShape rectangle(sf::Vector2f(200, 2));
-	rectangle.setPosition(sf::Vector2f(300, 100));
-	rectangle.setFillColor(sf::Color::Blue);
+
+    sf::Texture fireboyTexture;
+    sf::Texture watergirlTexture;
+    fireboyTexture.loadFromFile("fireboy.png");
+    watergirlTexture.loadFromFile("watergirl.png");
+    sf::Sprite fireboy(fireboyTexture);
+    sf::Sprite watergirl(watergirlTexture);
+
+    fireboy.setPosition(100, 100);
+    watergirl.setPosition(500, 100);
 
     while (window.isOpen())
     {
@@ -22,12 +24,56 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            fireboy.move(-5, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            fireboy.move(5, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            fireboy.move(0, -5);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            fireboy.move(0, 5);
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            watergirl.move(-5, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            watergirl.move(5, 0);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            watergirl.move(0, -5);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            watergirl.move(0, 5);
+
+
+
+
+        if (!isPaused)
+              {
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                      fireboy.move(-5, 0);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+                      fireboy.move(5, 0);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+                      fireboy.move(0, -5);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+                      fireboy.move(0, 5);
+
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+                      watergirl.move(-5, 0);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+                      watergirl.move(5, 0);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+                      watergirl.move(0, -5);
+                  if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+                      watergirl.move(0, 5);
+              }
+
+
         window.clear();
+
         window.draw(fireboy);
         window.draw(watergirl);
-        window.draw(key);
-        window.draw(door);
-        window.draw(obstacle);
+
+
         window.display();
     }
 
